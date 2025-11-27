@@ -1,0 +1,319 @@
+/* ==================================== */
+/* 1. 기본 설정 및 레이아웃 (General Setup & Layout) */
+/* ==================================== */
+
+body {
+  font-family: "Noto Sans KR", sans-serif;
+  margin: 0;
+  background-color: #f5f7fa; /* 연한 배경색 지정 */
+  color: #333;
+  /* 페이지 전체를 스크롤 가능한 2개 화면 분량으로 설정 */
+  min-height: 200vh; 
+  /* 헤더, 메인, 푸터를 세로로 배치하고 높이를 유연하게 조절하기 위해 flex 사용 */
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  background: #fff;
+  text-align: center;
+  padding: 20px;
+  font-size: 28px;
+  font-weight: bold;
+  border-bottom: 1px solid #e2e2e2;
+  /* 헤더 높이는 고정 (스크롤 시 크기 변화 방지) */
+  flex-shrink: 0;
+}
+
+main {
+  max-width: 900px;
+  margin: 40px auto; /* 중앙 정렬 */
+  padding: 20px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  /* 남은 수직 공간을 채우도록 설정 */
+  flex-grow: 1;
+
+  /* 내부 섹션들을 세로로 배치 */
+  display: flex;
+  flex-direction: column;
+  /* 긴 페이지 길이 확보를 위한 최소 높이 설정 */
+  min-height: calc(100vh * 1.5 - 100px); 
+}
+
+/* ==================================== */
+/* 2. 섹션별 레이아웃 및 간격 (Sections Layout) */
+/* ==================================== */
+
+/* 섹션 공통 스타일 */
+section {
+  /* 섹션 간의 수직 간격을 줄임 */
+  margin-bottom: 25px; 
+  /* 내용만큼만 높이를 차지하도록 설정 */
+  flex-grow: 0; 
+  flex-shrink: 0;
+}
+
+.tech-section {
+    flex-shrink: 0; 
+}
+
+.terms {
+    flex-shrink: 0;
+}
+
+.upload-control {
+    /* 내용 크기만큼만 높이를 차지하도록 설정 */
+    flex-grow: 0; 
+    /* 이용약관(hr)과의 수직 간격을 최소화 */
+    margin-top: 5px; 
+    
+    display: flex;
+    flex-direction: column;
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  /* 왼쪽 파란색 세로줄 디자인 */
+  border-left: 5px solid #0078ff;
+  padding-left: 10px;
+}
+
+hr {
+    border: 0;
+    height: 1px;
+    background: #e2e2e2;
+    /* 섹션 간의 분리선 역할, 상하 마진을 줄여 간격 최소화 */
+    margin: 15px 0; 
+}
+
+/* ==================================== */
+/* 3. 필터 기술 정의 섹션 (Tech Section) */
+/* ==================================== */
+
+/* 기술 카드들을 수평으로 나열 */
+.tech-cards {
+  display: flex;
+  gap: 20px;
+  align-items: center; 
+}
+
+.card {
+  flex: 1; /* 가로 공간을 균등하게 차지 */
+  background: #f0f4ff;
+  border-radius: 10px;
+  padding: 15px;
+  text-align: center;
+  min-height: 120px; 
+}
+
+.card img {
+  width: 50px;
+  height: 50px;
+  margin-bottom: 5px;
+}
+
+/* ==================================== */
+/* 4. 법률적 동의 섹션 (Terms Section) */
+/* ==================================== */
+
+.terms {
+  background: #fafafa;
+  border-radius: 10px;
+  padding: 20px;
+  font-size: 14px;
+}
+
+.terms-content {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    background: #fff;
+    border-radius: 5px;
+}
+
+.terms input {
+  margin-right: 8px;
+}
+
+/* ==================================== */
+/* 5. 이미지 업로드 및 필터 적용 섹션 (Upload Control) */
+/* ==================================== */
+
+/* 필터 전/후 이미지와 강도 선택 박스를 수평으로 배치 */
+.filter-box {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap;
+  margin-top: 0; 
+}
+
+/* image-box를 클릭하여 파일 업로드가 가능하도록 label 속성을 block으로 설정 */
+.filter-box label {
+    display: block;
+}
+
+.image-box {
+  text-align: center;
+}
+
+/* 업로드 영역임을 표시하기 위해 커서 모양 변경 */
+.image-box.before {
+    cursor: pointer;
+    margin: 0;
+    padding: 0;
+}
+
+/* 이미지 뷰어 (이미지 및 Placeholder를 담는 컨테이너) */
+.image-viewer {
+    position: relative;
+    /* 상하로 길쭉한 비율로 크기 설정 */
+    width: 300px; 
+    height: 450px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15); 
+    margin-bottom: 15px; 
+    overflow: hidden;
+}
+
+.image-box img {
+  /* 뷰어 크기에 맞춰 이미지 채우기 */
+  width: 100%; 
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: none; 
+}
+
+/* 이미지 삽입/표시 유도 박스 (Placeholder) */
+.image-placeholder {
+    position: absolute; /* image-viewer 위에 겹쳐 표시 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #eef; 
+    border: 3px dashed #ccc;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+    transition: opacity 0.3s;
+}
+
+/* 필터 후 이미지 박스는 다른 색상으로 구분 */
+.image-box.after .image-placeholder {
+    background-color: #ffe; 
+    border-color: #aaa;
+}
+
+.placeholder-text {
+    font-size: 18px;
+    font-weight: bold;
+    padding: 8px 12px;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 4px;
+}
+
+/* ==================================== */
+/* 6. 필터 강도 선택 (Radio Box) */
+/* ==================================== */
+
+.slider-box {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* 이미지 뷰어 높이와 동일하게 설정하여 수직 중앙 정렬 효과 */
+  min-height: 450px; 
+}
+
+.slider-box .box-title {
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.radio-group {
+    display: flex;
+    flex-direction: column; 
+    gap: 15px; 
+    width: 100%;
+}
+
+.radio-label {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 8px 15px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.radio-label:hover {
+    background-color: #e0e7ff; 
+    border-color: #0078ff;
+}
+
+.radio-label input[type="radio"] {
+    margin-right: 10px;
+    transform: scale(1.1);
+}
+
+/* 선택된 라디오 버튼 텍스트 강조 */
+.radio-label input[type="radio"]:checked + span {
+    color: #0078ff;
+    font-weight: bold;
+}
+
+/* ==================================== */
+/* 7. 버튼 및 푸터 (Buttons & Footer) */
+/* ==================================== */
+
+.btn-box {
+  text-align: center;
+  margin-top: 30px;
+}
+
+button {
+  padding: 10px 20px;
+  margin: 0 5px;
+  background-color: #e0e7ff;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+button:hover {
+  background-color: #c7d7ff;
+}
+
+button.primary {
+  background-color: #0078ff;
+  color: white;
+}
+
+button.primary:hover {
+  background-color: #005fd1;
+}
+
+footer {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  /* 푸터를 페이지 하단에 고정 */
+  margin-top: auto;
+  padding-bottom: 20px;
+  flex-shrink: 0;
+}
