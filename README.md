@@ -27,10 +27,10 @@ Dankook Uni. Opensource_Nofake
 
 2. ngrok 토큰 입력 (세 번째 셀) 서버를 외부와 연결하기 위해 본인의 ngrok 토큰이 필요합니다. (ngrok 홈페이지에서 로그인 후 복사)
 
-# [수정 전]
+[수정 전]
 NGROK_TOKEN = "여기에_토큰을_넣으세요"
 
-# [수정 후 예시]
+[수정 후 예시]
 NGROK_TOKEN = "2And9s8f7..."
 
 3. 서버 가동
