@@ -5,7 +5,7 @@
 body {
   font-family: "Noto Sans KR", sans-serif;
   margin: 0;
-  background-color: #f5f7fa; /* 연한 배경색 지정 */
+  background-color: #f5f7fa; /* 연한 배경색 */
   color: #333;
   /* 페이지 전체를 스크롤 가능한 2개 화면 분량으로 설정 */
   min-height: 200vh; 
@@ -17,8 +17,8 @@ body {
 header {
   background: #fff;
   text-align: center;
-  padding: 20px;
-  font-size: 28px;
+  padding: 9px;
+  font-size: 30px;
   font-weight: bold;
   border-bottom: 1px solid #e2e2e2;
   /* 헤더 높이는 고정 (스크롤 시 크기 변화 방지) */
@@ -86,7 +86,7 @@ hr {
     height: 1px;
     background: #e2e2e2;
     /* 섹션 간의 분리선 역할, 상하 마진을 줄여 간격 최소화 */
-    margin: 15px 0; 
+    margin: 10px 0; 
 }
 
 /* ==================================== */
@@ -131,6 +131,7 @@ hr {
     clear: both; /* float된 이미지 아래에 위치하도록 설정 */
     font-size: 12px;
     color: #555;
+  text-align: right;
 }
 
 /* ==================================== */
@@ -140,20 +141,48 @@ hr {
 .terms {
   background: #fafafa;
   border-radius: 10px;
-  padding: 20px;
+  padding: 10px;
   font-size: 14px;
 }
 
-.terms-content {
-    margin-bottom: 15px;
+.agree-group-master {
+    margin: 5px;
     padding: 10px;
-    border: 1px solid #eee;
-    background: #fff;
+    border: 1px solid #0078ff; /* 모두 동의 박스 테두리 강조 */
     border-radius: 5px;
+    background-color: #e0e7ff; /* 배경색 강조 */
+    font-weight: bold;
 }
 
-.terms input {
-  margin-right: 8px;
+.agree-group-master input {
+    /* 모두 동의 체크박스를 조금 더 크게 */
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.agree-divider {
+    /* 구분선 간격 조정 */
+    margin: 5px 0;
+}
+
+.agree-group-sub {
+    display: flex;
+    flex-direction: column;
+    gap: 6px; /* 하위 항목 간의 간격 */
+}
+
+.sub-agree-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.sub-agree-label input {
+    margin-right: 10px;
+}
+
+.sub-agree-label span {
+    color: #333;
 }
 
 /* ==================================== */
@@ -337,6 +366,6 @@ footer {
 }
 
 .scroll-locked {
-    /* 스크롤 잠금 */
+    /* 스크롤 잠금: 화면의 내용이 넘치더라도 스크롤 바가 생기지 않도록 합니다. */
     overflow-y: hidden;
 }
