@@ -13,41 +13,75 @@
   
   <main>
     <section class="tech-section">
-      <h2>필터기술 정의</h2>
-      <div class="tech-cards">
-        <div class="card">
-          <img src="https://via.placeholder.com/60/a4c6f9/fff?text=FGSM" alt="안티포저리 기술 아이콘">
-          <p>
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트테스트
-		  FGSM: Fast Gradient Sign Method를 활용한 적대적 예제 생성 필터
-		  </p>
-          <small>딥페이크 탐지를 회피/강화하기 위한 영상 필터링 기술</small>
-        </div>
-        <div class="card">
-          <img src="https://via.placeholder.com/60/7ac97d/fff?text=Process" alt="이용 방법">
-          <p>처리 과정: 이미지 업로드 → 노이즈 주입 → 필터 이미지</p>
-          <small>이곳에 사용방법을 입력</small>
-        </div>
-      </div>
+		<h2>필터기술 정의</h2>
+			<div class="tech-cards">
+			<div class="card">
+			<img src="https://via.placeholder.com/60/a4c6f9/fff?text=FGSM" alt="안티포저리 기술 아이콘">
+			<p>
+			기술 정의: Anti-Forgery (적대적 이미지) <br>
+			저희 필터의 핵심은 적대적 이미지(Adversarial Image) 기법을 활용한 Anti-Forgery 기술입니다.
+			이 기술은 AI 모델을 표적으로 삼아 시각적 교란 공격을 가하는 방식입니다. <br>
+			- 인간 시각: 원본과 구별 불가능한 평범한 사진으로 보입니다. <br>
+			- AI 시각: 얼굴 특징을 읽을 수 없는 노이즈 데이터로 인식되어, 딥페이크 합성을 불가능하게 만듭니다.
+			</p>
+			<small>⚠️ 중요: 강도가 높다고 모든 딥페이크 모델에 대해 항상 최고의 성능을 보장하는 것은 아닙니다</small>
+			</div>
+			<div class="card">
+				 <img src="https://via.placeholder.com/60/7ac97d/fff?text=Process" alt="이용 방법">
+				 <p>
+				 사용 방법 : 이미지 업로드 → 필터 강도(픽셀변경 강도) 선택 → 노이즈 주입 → 결과 이미지 확인 후 결과 저장 <br>
+				 필터 강도	픽셀 변경 수준	딥페이크 방어력	사용자 화질 체감 <br>
+				 높음 (강)	눈에 띄게 변경될 수 있음	강력함	낮음 <br>
+				 중간 (중)	미세하게 변경됨	중간	보통 <br>
+				 낮음 (약)	눈에 거의 띄지 않음	약함	높음 
+				 </p>
+			</div>
+			</div>
     </section>
 
- <section class="terms">
-      <h2>법률적 동의 및 이용약관</h2>
-      <p class="terms-content">
-        본 필터 기술은 학술적 연구 및 테스트 목적으로만 제공됩니다. 필터 적용 결과물을 무단으로 활용하거나, 타인의 권리를 침해하는 행위는 **법적 책임**이 따를 수 있습니다.
-      </p>
-      <label>
-        <input type="checkbox" id="terms-agree"> 
-        상기 이용 목적 및 법적 고지 사항을 모두 확인하고 동의합니다.
-      </label>
+	<section class="terms">
+		<h2>법률적 동의 및 이용약관</h2>
+		<p class="terms-content">
+		본 필터 기술은 학술적 연구 및 테스트 목적으로만 제공됩니다. 필터 적용 결과물을 무단으로 활용하거나, 타인의 권리를
+		침해하는 행위는 법적 책임이 따를 수 있습니다.
+		</p>
+		<hr class="agree-divider">
+
+		<div class="agree-group-sub">
+			<label class="sub-agree-label">
+				<input type="checkbox" class="required-agree"> 
+				<span>
+				필터 기술 사용을 위해 사용자가 제공한 이미지가 사용되며
+				해당 이미지는 필터 적용 후 폐기됩니다.				
+				</span>
+			</label>
+			<label class="sub-agree-label">
+				<input type="checkbox" class="required-agree"> 
+				<span>
+				필터 적용에 사용되는 기술에 대해 페이지가 제공한 정보를 확인하셨습니까?
+				</span>
+			</label>
+			<label class="sub-agree-label">
+				<input type="checkbox" class="required-agree"> 
+				<span>
+				해당 필터기술은 모든 딥페이크 모델에 대해 동일한 성능을 보이지 않으며
+				사진, 딥페이크 모델, 필터 강도에 따라 차이가 있을 수 있습니다.
+				</span>
+			</label>
+			<label class="sub-agree-label">
+				<input type="checkbox" class="required-agree"> 
+				<span>
+				해당 페이지는 필터가 적용된 사진을 악용하지 않겠습니다.
+				</span> 
+			</label>
+		</div>
+	  
+	  
+		<div class="agree-group-master">
+        <label>
+            <input type="checkbox" id="terms-agree-all"> 
+            <span class="all-agree-text">약관 전체에 동의합니다.</span> </label>
+		</div>
     </section>
 
     <hr>
@@ -115,5 +149,3 @@
   </footer>
 </body>
 </html>
-
-/* 위에 테스트 부분은 사이즈 맞추기용입니다.*/
