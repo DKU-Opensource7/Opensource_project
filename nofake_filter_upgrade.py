@@ -231,8 +231,6 @@ class NoFakeShield:
                 delta.grad.zero_()
 
             # ---------------------------
-            # [핵심 수정] 원본 교체 대신 '노이즈'만 추출하여 더하기
-            # ---------------------------
             # 1. 델타(노이즈)만 추출 (-1 ~ 1 범위)
             noise_delta = delta.detach().cpu().squeeze(0).permute(1, 2, 0).numpy()
             
@@ -249,7 +247,7 @@ class NoFakeShield:
             mask_alpha = self.get_noise_mask(img_rgb.shape, M)
 
             # 5. 원본 이미지에 노이즈 '더하기' (덮어쓰기 X)
-            # 마스크가 있는 영역에만 노이즈를 더해줍니다.
+            # 마스크가 있는 영역에만 노이즈를 더하기
             result_image_float += unwarped_noise * mask_alpha
 
         # 0~1 사이로 값 자르기 (Overflow 방지)
@@ -277,11 +275,11 @@ shield = NoFakeShield(MODEL_LINK)
 def get_filter_params(strength):
     """ 웹에서 선택한 강도에 따라 파라미터(epsilon, iterations) 반환 """
     if strength == 'high':
-        return 0.025, 30   # 상: 강도 높임 (노이즈가 더 보이지만 방어력 up)
+        return 0.025, 30   # 상
     elif strength == 'low':
-        return 0.015, 30  # 하: 정말 미세한 노이즈
+        return 0.015, 30  # 하
     else:
-        return 0.02, 30  # 중: 기본값
+        return 0.02, 30  # 중
 
 def apply_deepfake_protection(image_path, output_path, strength='medium'):
     # 강도 설정
@@ -304,4 +302,5 @@ def apply_deepfake_protection(image_path, output_path, strength='medium'):
 
     except Exception as e:
         print(f"❌ [Error] 필터 적용 실패: {e}")
+
         return None
