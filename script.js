@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const masterCheckbox = document.getElementById('terms-agree-all');
     const subCheckboxes = document.querySelectorAll('.required-agree'); // 클래스 이름 주의
     const uploadSection = document.getElementById('upload-section');
+    const applyButton = document.getElementById('btn-apply');
 
     // (1) '전체 동의' 클릭 시
     if(masterCheckbox) {
@@ -40,6 +41,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } else {
             body.classList.add('scroll-locked');
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        if (applyButton) {
+            applyButton.disabled = !isUnlocked;
         }
     }
 
