@@ -111,44 +111,44 @@ def iresnet100(pretrained=False, progress=True, **kwargs):
 
 
 # =========================================================
-# 2. NoFakeShield 클래스 정의 (핵심 엔진)
+# 2. NoFakeShield 클래스 정의
 # =========================================================
 class NoFakeShield:
     def __init__(self, model_link_or_path):
         self.device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        print(f"⚙️ [System] Device: {self.device}")
+        print(f"[System] Device: {self.device}")
 
         # [자동 다운로드] 모델 파일 처리
         if model_link_or_path.startswith('http'):
             local_model_path = 'arcface_model.pth'
             if not os.path.exists(local_model_path):
-                print(f"⬇️ [System] 모델 다운로드 시작... (1~2분 소요)")
+                print(f"[System] 모델 다운로드 시작")
                 gdown.download(model_link_or_path, local_model_path, quiet=False, fuzzy=True)
             self.model_path = local_model_path
         else:
             self.model_path = model_link_or_path
 
         # 1. LPIPS 모델 로드
-        print("👁️ [System] Loading LPIPS model...")
+        print("[System] Loading LPIPS model...")
         self.lpips_loss = lpips.LPIPS(net='alex').to(self.device)
         self.lpips_loss.eval()
 
         # 2. 얼굴 감지용 모델 로드
-        print("🔍 [System] Loading Face Detection model...")
+        print("[System] Loading Face Detection model...")
         self.face_app = FaceAnalysis(name='buffalo_l', providers=['CUDAExecutionProvider', 'CPUExecutionProvider'])
         self.face_app.prepare(ctx_id=0, det_size=(640, 640))
 
         # 3. 공격 대상 모델 (ArcFace r100) 로드
-        print("🛡️ [System] Loading ArcFace recognition model...")
+        print("[System] Loading ArcFace recognition model...")
         try:
             self.recognition_model = iresnet100(dropout=0.0, fp16=False, num_features=512).to(self.device)
             self.recognition_model.load_state_dict(torch.load(self.model_path, map_location=self.device))
             self.recognition_model.eval()
             for param in self.recognition_model.parameters():
                 param.requires_grad = False
-            print("✅ [System] ArcFace model loaded successfully!")
+            print("[System] ArcFace model loaded successfully!")
         except Exception as e:
-            print(f"🚨 [ERROR] 모델 로드 실패: {e}")
+            print(f"[ERROR] 모델 로드 실패: {e}")
             raise e
 
         # 4. 전처리기 정의
@@ -247,7 +247,7 @@ class NoFakeShield:
 MODEL_LINK = 'https://drive.google.com/file/d/1NEJ1f6aDMoYDc65p508TXKzppNRi2ktD/view?usp=drive_link'
 
 # 서버가 켜질 때 모델을 미리 로딩합니다.
-print("🚀 [Init] NoFake Shield 엔진을 초기화합니다...")
+print("[Init] NoFake Shield 엔진을 초기화합니다...")
 shield = NoFakeShield(MODEL_LINK)
 
 
@@ -258,16 +258,16 @@ shield = NoFakeShield(MODEL_LINK)
 def get_filter_params(strength):
     """ 웹에서 선택한 강도에 따라 파라미터(epsilon, iterations) 반환 """
     if strength == 'high':
-        return 0.025, 30   # 상: 강한 노이즈
+        return 0.025, 30   # 상
     elif strength == 'low':
-        return 0.015, 30  # 하: 약한 노이즈
+        return 0.015, 30  # 하
     else:
-        return 0.02, 30   # 중: 기본값
+        return 0.02, 30   # 중
 
 def apply_deepfake_protection(image_path, output_path, strength='medium'):
     # 강도 설정
     epsilon, iterations = get_filter_params(strength)
-    print(f"🔄 [Request] 강도: {strength} (Eps: {epsilon}, Iter: {iterations})")
+    print(f"[Request] 강도: {strength} (Eps: {epsilon}, Iter: {iterations})")
     
     try:
         # 필터 적용 (shield 인스턴스 사용)
@@ -280,9 +280,10 @@ def apply_deepfake_protection(image_path, output_path, strength='medium'):
         
         # 결과 저장
         cv2.imwrite(output_path, result_img)
-        print(f"✅ [Success] 저장 완료: {output_path}")
+        print(f"[Success] 저장 완료: {output_path}")
         return output_path
 
     except Exception as e:
-        print(f"❌ [Error] 필터 적용 실패: {e}")
+        print(f"[Error] 필터 적용 실패: {e}")
         return None
+
